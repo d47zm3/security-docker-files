@@ -4,8 +4,12 @@ To improve DevSecOps, Penetration Testing etc.
 
 ## nmap
 
-Download latest package from NMAP site, install it, staged build for minimal size.
+download latest package from NMAP site, install it, staged build for minimal size.
 
 ## nikto
 
-Clone latest version from repository.
+clone latest version from repository.
+
+## htrace
+
+use modified dockerfile from original repository (here)[https://github.com/trimstray/htrace.sh] to include latest nmap
