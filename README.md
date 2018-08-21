@@ -5,7 +5,7 @@ To improve DevSecOps, Penetration Testing etc. Some tools have already automated
 
 ## nmap
 
-download latest package from NMAP site, install it, staged build for minimal size.
+download latest package from nmap site, install it, staged build for minimal size.
 
 
 ## nikto
