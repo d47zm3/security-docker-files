@@ -3,7 +3,7 @@
 cwd=$( pwd )
 for dir in $( ls -d */ )
 do
-  cd ${dir}
+  cd "${dir}"
   # if Dockerfile exists
   if [[ -e "Dockerfile" ]]
   then
@@ -13,5 +13,6 @@ do
     cd ${cwd}
   else
     echo "[*] starting build script..."
+    cd ${cwd}
   fi
 done

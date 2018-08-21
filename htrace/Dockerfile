@@ -1,8 +1,25 @@
+### BEG SCRIPT INFO
+#
+# Header:
+#
+#         fname : "Dockerfile"
+#         cdate : "12.07.2018"
+#        author : "Michał Żurawski <trimstray@gmail.com>"
+#      tab_size : "2"
+#     soft_tabs : "yes"
+#
+# Description:
+#
+#   This Dockerfile builds a static htrace.sh in a Docker container.
+#
 #   For build:
 #     docker build --rm -t htrace.sh -f Dockerfile .
 #
 #   For init:
 #     docker run --rm -it --name htrace.sh htrace.sh -d http://nmap.org -h
+#
+#   For debug:
+#     docker run --rm -it --entrypoint /bin/bash --name htrace.sh htrace.sh
 #
 # License:
 #
@@ -23,7 +40,7 @@
 #
 ### END SCRIPT INFO
 
-FROM debian:stretch
+FROM debian:buster
 
 MAINTAINER trimstray "trimstray@gmail.com"
 LABEL image_name="security-tools:htrace"
@@ -42,7 +59,7 @@ RUN \
 # htrace.sh tools.
 RUN \
   apt-get update && \
-  apt-get install -y git openssl curl bc wget alien
+  apt-get install -y git openssl curl bc
 
 # For Mozilla-Observatory.
 RUN \
@@ -54,20 +71,20 @@ RUN \
 RUN \
   apt-get install -y golang && \
   go get github.com/ssllabs/ssllabs-scan && \
+  # It's important - PATH is hardcoded in src/settings.
   ln -s /opt/go/bin/ssllabs-scan /usr/bin/ssllabs-scan
 
 # For mixed-content-scan.
 RUN \
-  apt-get install -y composer php-curl php-dom && \
+  apt-get install -y composer php7.2-curl php7.2-xml && \
   composer global require bramus/mixed-content-scan && \
+  # It's important - PATH is hardcoded in src/settings.
   ln -s /root/.composer/vendor/bramus/mixed-content-scan/bin/mixed-content-scan \
   /usr/bin/mixed-content-scan
 
 # For Nmap NSE Library.
-
-RUN wget https://nmap.org/dist/nmap-7.70-1.x86_64.rpm
-RUN alien nmap-7.70-1.x86_64.rpm
-RUN dpkg -i nmap_7.70-2_amd64.deb
+RUN \
+  apt-get install -y nmap
 
 RUN \
   mkdir -p /opt/git && cd /opt/git && \

@@ -12,3 +12,6 @@ RUN mkdir /opt/tools
 RUN cd /opt/tools && git clone https://github.com/sullo/nikto nikto
 RUN mv /opt/tools/nikto/program/* /usr/local/bin/
 RUN ln -s /usr/local/bin/nikto.pl /usr/local/bin/nikto
+
+WORKDIR /usr/local/bin/
+ENTRYPOINT ["/usr/local/bin/nikto.pl"]
