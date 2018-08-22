@@ -15,7 +15,7 @@ clone latest version from repository.
 
 ## htrace
 
-use modified dockerfile from original repository (here)[https://github.com/trimstray/htrace.sh] to include image name
+use modified dockerfile from original repository [here](https://github.com/trimstray/htrace.sh) to include image name
 
 
 ## amass
