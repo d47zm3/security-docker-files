@@ -30,3 +30,7 @@ long, deep scan, work in progress
 ## owasp zap
 
 owasp scanner for most common web application issues
+
+## gitrob
+
+scanning github repositories for sensitive data

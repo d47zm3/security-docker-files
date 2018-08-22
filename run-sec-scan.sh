@@ -8,25 +8,39 @@ then
   exit 1
 fi
 
-domain_name=$( echo "${target}" | grep -o "/\/.*\/" | sed -e "s/\///g")
+domain_name=$( echo "${target}/" | grep -o "/\/.*\/" | sed -e "s/\///g")
+reports_dir="./reports"
+
+if [[ ! -d "${reports_dir}" ]]
+then
+  mkdir "${reports_dir}"
+fi
 
 docker_pre="docker run -it --rm"
 
 ./build-all.sh
 
 echo "[*] running scans for ${target} (domain name: ${domain_name})..."
+echo "[*] start time: $( date +'%H:%M %d-%m-%y' )"
+
+nmap_logfile="${reports_dir}/${domain_name}.nmap.log"
+nikto_logfile="${reports_dir}/${domain_name}.nikto.log"
+htrace_logfile="${reports_dir}/${domain_name}.htrace.log"
+owasp_logfile="${reports_dir}/${domain_name}.owasp.log"
 
 # nmap
-#${docker_pre} security-tools:nmap nmap -A ${domain_name}
+${docker_pre} security-tools:nmap nmap -A ${domain_name} &> ${nmap_logfile}
 
 # nikto
-#${docker_pre} security-tools:nikto -host ${target}
+${docker_pre} security-tools:nikto -host ${target} &> ${nikto_logfile}
 
 # htrace
-# ${docker_pre} security-tools:htrace -d ${target} --scan all --mixed-content --nse -s
+${docker_pre} security-tools:htrace -d ${target} --scan all --mixed-content --nse -s &> ${htrace_logfile}
 
 # owasp zap proxy - no need to build image
-docker run --rm -t owasp/zap2docker-weekly zap-baseline.py -t ${target}
+docker run --rm -t owasp/zap2docker-weekly zap-baseline.py -t ${target} &> ${owasp_logfile}
+
+echo "[*] end time: $( date +'%H:%M %d-%m-%y' )"
 
 # arachni - this one takes lots of time, commented out for now
 # mkdir -p $PWD/reports $PWD/artifacts;
