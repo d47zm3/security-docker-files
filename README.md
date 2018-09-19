@@ -34,3 +34,11 @@ owasp scanner for most common web application issues
 ## gitrob
 
 scanning github repositories for sensitive data
+
+## spiderfoot
+
+advanced osint platform that has plugins for ton of third party platform, allows for saving settings like api keys by volume mounting database of spiderfoot
+
+## maltego
+
+credits to guy [here](https://github.com/danielguerra69/kali-maltego) 
