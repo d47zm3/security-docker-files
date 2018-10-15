@@ -18,10 +18,6 @@ clone latest version from repository.
 use modified dockerfile from original repository [here](https://github.com/trimstray/htrace.sh) to include image name
 
 
-## amass
-
-subdomain enumeration from owasp
-
 ## arachni
 
 long, deep scan, work in progress
@@ -35,10 +31,17 @@ owasp scanner for most common web application issues
 
 scanning github repositories for sensitive data
 
+
 ## spiderfoot
 
 advanced osint platform that has plugins for ton of third party platform, allows for saving settings like api keys by volume mounting database of spiderfoot
 
+
 ## maltego
 
-credits to guy [here](https://github.com/danielguerra69/kali-maltego) 
+osint platform with gui, credits to guy [here](https://github.com/danielguerra69/kali-maltego) 
+
+
+## domained
+
+tool to enumerate subdomains, using many already available tools, [source](https://github.com/cakinney/domained)
