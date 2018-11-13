@@ -2,7 +2,6 @@
 
 . ../_scripts_/.common.sh
 
-docker run -i --rm security-tools:nmap nmap -h  | grep -iq "timing"
 docker run -i --rm security-tools:crt.sh /crt.sh github.com | grep -iq "github.io"
 
 if [[ ${?} -eq 0 ]]
