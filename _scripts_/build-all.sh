@@ -18,6 +18,8 @@ do
     cd ${cwd}
   else
     echo "[*] $(date +'%H:%M:%S') starting build script..."
+    chmod +x ./build.sh
+    ./build.sh
     cd ${cwd}
   fi
 done
