@@ -1,10 +1,12 @@
 #!/bin/bash
 
+ignore="maltego"
+
 cd ..
 cwd=$( pwd )
 # show build logs, set "-q" to hide output, empty to show it
 debug="" 
-for dir in $( ls -d */ )
+for dir in $( ls -d */ | grep -v ${ignore} )
 do
   cd "${dir}"
   # if Dockerfile exists
