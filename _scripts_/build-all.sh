@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ignore="maltego|_scripts_|_reports_"
+ignore="maltego|_scripts_|_reports_|enum-all"
 
 error=0
 
