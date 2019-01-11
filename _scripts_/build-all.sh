@@ -26,14 +26,14 @@ do
     fi
     cd ${cwd}
   else
-    echo "[*] $(date +'%H:%M:%S') starting build script inside ${dir}..."
+    echo "[*] $(date +'%H:%M:%S') starting build script inside ${dir_stripped}..."
     chmod +x ./build.sh
     ./build.sh > ${dir_stripped}.build.log
     if [[ ${?} -ne 0 ]]
     then
       error=1
-      echo "[*] $(date +'%H:%M:%S') building custom image from ${dir} failed! log is shown below..."
-      cat ${dir}.build.log
+      echo "[*] $(date +'%H:%M:%S') building custom image from ${dir_stripped} failed! log is shown below..."
+      cat ${dir_stripped}.build.log
     fi
     cd ${cwd}
   fi
