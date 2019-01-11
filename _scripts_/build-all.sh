@@ -10,6 +10,11 @@ cwd=$( pwd )
 debug="" 
 for dir in $( ls -d */ | egrep -v ${ignore} )
 do
+  if [[ -z ${dir} ]]
+  then
+    continue
+  fi
+
   dir_stripped=$( echo ${dir} | sed "s/\/$//g" )
   cd "${dir}"
   # if Dockerfile exists
@@ -38,3 +43,8 @@ do
     cd ${cwd}
   fi
 done
+
+if [[ ${error} -eq 1 ]]
+then
+  exit 1
+fi
