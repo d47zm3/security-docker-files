@@ -28,6 +28,8 @@ do
       error=1
       echo "[*] $(date +'%H:%M:%S') building ${image_name} failed! log is shown below..."
       cat ${image_name}.build.log
+    else
+      docker push d47zm3/${image_name}
     fi
     cd ${cwd}
   else
