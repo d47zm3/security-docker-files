@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ignore="maltego"
+ignore="maltego|_scripts_|_reports_"
 
 error=0
 
@@ -8,8 +8,9 @@ cd ..
 cwd=$( pwd )
 # show build logs, set "-q" to hide output, empty to show it
 debug="" 
-for dir in $( ls -d */ | grep -v ${ignore} )
+for dir in $( ls -d */ | egrep -v ${ignore} )
 do
+  dir_stripped=$( echo ${dir} | sed "s/\/$//g" )
   cd "${dir}"
   # if Dockerfile exists
   if [[ -e "Dockerfile" ]]
@@ -25,9 +26,9 @@ do
     fi
     cd ${cwd}
   else
-    echo "[*] $(date +'%H:%M:%S') starting build script..."
+    echo "[*] $(date +'%H:%M:%S') starting build script inside ${dir}..."
     chmod +x ./build.sh
-    ./build.sh > ${dir}.build.log
+    ./build.sh > ${dir_stripped}.build.log
     if [[ ${?} -ne 0 ]]
     then
       error=1
