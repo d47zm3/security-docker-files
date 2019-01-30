@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ignore="maltego|_scripts_|_reports_|enum-all"
+ignore="maltego|_scripts_|_reports_|enum-all|sqlmap"
 
 error=0
 
@@ -16,6 +16,7 @@ do
   fi
 
   dir_stripped=$( echo ${dir} | sed "s/\/$//g" )
+
   cd "${dir}"
   # if Dockerfile exists
   if [[ -e "Dockerfile" ]]
@@ -29,8 +30,13 @@ do
       echo "[*] $(date +'%H:%M:%S') building ${image_name} failed! log is shown below..."
       cat ${image_name}.build.log
     else
-      docker tag ${image_name} d47zm3/${image_name}
-      docker push d47zm3/${image_name}
+      branch=$(git rev-parse --abbrev-ref HEAD)
+      if [[ ${branch} == "master" ]]
+      then
+        echo "[*] $(date +'%H:%M:%S') master branch, pushing image to repository..."
+        docker tag ${image_name} d47zm3/${image_name}
+        docker push d47zm3/${image_name}
+      fi
     fi
     cd ${cwd}
   else
