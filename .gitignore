@@ -4,3 +4,4 @@ targets.txt
 locals/spiderfoot.db
 amass/temporary/
 */temporary/
+*/*.build.log
