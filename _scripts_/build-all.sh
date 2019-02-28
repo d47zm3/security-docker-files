@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ignore="maltego|_scripts_|_reports_|enum-all|sqlmap"
+ignore="_scripts_|_reports_|enum-all"
 
 error=0
 
@@ -31,6 +31,7 @@ do
       cat ${image_name}.build.log
     else
       branch=$(git rev-parse --abbrev-ref HEAD)
+      echo "[*] $(date +'%H:%M:%S') current branch is ${branch}..."
       if [[ ${branch} == "master" ]]
       then
         echo "[*] $(date +'%H:%M:%S') master branch, pushing image to repository..."
